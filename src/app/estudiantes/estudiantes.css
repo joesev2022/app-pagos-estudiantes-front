@@ -1,0 +1,26 @@
+/*generate an atractive and responsive table with css with blue colors theme*/
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #0077b6;
+  color: #fff;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #4265d8;
+}

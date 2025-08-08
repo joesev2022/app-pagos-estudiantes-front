@@ -31,6 +31,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from './guards/auth-guard';
 import { AuthorizationGuard } from './guards/authorization.guard';
 import { provideHttpClient } from '@angular/common/http';
+import { EstudianteDetalle } from './estudiante-detalle/estudiante-detalle';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { provideHttpClient } from '@angular/common/http';
     Login,
     Estudiantes,
     Pagos,
-    Dashboard
+    Dashboard,
+    EstudianteDetalle
   ],
   imports: [
     BrowserModule,

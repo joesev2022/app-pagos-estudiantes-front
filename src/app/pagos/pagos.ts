@@ -3,6 +3,7 @@ import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { EstudiantesService } from '../services/estudiantes';
 
 @Component({
   selector: 'app-pagos',
@@ -18,10 +19,10 @@ export class Pagos {
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
   @ViewChild(MatSort) sort: MatSort | undefined;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private estudianteService: EstudiantesService) { }
 
   ngOnInit() {
-    this.http.get('http://localhost:8080/pagos').subscribe({
+    this.estudianteService.getAllPagos().subscribe({
       next: (data) => {
         this.pagos = data;
         this.dataSource = new MatTableDataSource(this.pagos);

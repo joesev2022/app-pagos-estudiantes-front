@@ -5,7 +5,32 @@
     </mat-card-header>
     <mat-divider></mat-divider>
     <mat-card-content>
-      <p>Lista de estudiantes</p>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Código</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Programa</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for(estudiante of estudiantes; track estudiante.id) {
+            <tr>
+              <td>{{estudiante.id}}</td>
+              <td>{{estudiante.codigo}}</td>
+              <td>{{estudiante.nombre}}</td>
+              <td>{{estudiante.apellido}}</td>
+              <td>{{estudiante.progamaId}}</td>
+              <td>
+                <button class="btn btn-primary" (click)="listarPagosDeEstudiante(estudiante)">Ver Pagos</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
     </mat-card-content>
   </mat-card>
 </div>
