@@ -5,7 +5,7 @@
   <span>My App</span>
 
   <span style="flex: auto;"></span>
-
+  @if (!(isSmall$ | async)) {
   <button mat-button routerLink="/admin/home">Home</button>
   <button mat-button routerLink="/admin/profile">Perfil</button>
 
@@ -16,11 +16,6 @@
     </button>
   }
 
-  <mat-menu #importMenu="matMenu">
-    <button mat-menu-item routerLink="/admin/load-estudiantes">Cargar Estudiantes</button>
-    <button mat-menu-item routerLink="/admin/load-pagos">Cargar Pagos</button>
-  </mat-menu>
-
   @if (authService.isAuthenticated) {
     <button mat-button>
       <mat-icon iconPosition="end">person</mat-icon>
@@ -29,6 +24,45 @@
   }
 
   <button mat-raised-button color="accent" (click)="authService.logout()">Salir</button>
+  } @else {
+    <button mat-icon-button [matMenuTriggerFor]="moreMenu" aria-label="Más acciones">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+
+    <mat-menu #moreMenu="matMenu">
+      <ng-container *ngTemplateOutlet="menuActions"></ng-container>
+    </mat-menu>
+  }
+
+  <mat-menu #importMenu="matMenu">
+    <button mat-menu-item routerLink="/admin/load-estudiantes">Cargar Estudiantes</button>
+    <button mat-menu-item routerLink="/admin/load-pagos">Cargar Pagos</button>
+  </mat-menu>
+
+  <ng-template #menuActions>
+  <button mat-menu-item routerLink="/admin/home">Home</button>
+  <button mat-menu-item routerLink="/admin/profile">Perfil</button>
+
+  @if (authService.roles.includes('ADMIN')) {
+    <!-- Importar como submenú dentro del menú “Más” -->
+    <button mat-menu-item [matMenuTriggerFor]="importMenu">
+      <span>Importar</span>
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+  }
+
+  @if (authService.isAuthenticated) {
+    <button mat-menu-item disabled>
+      <mat-icon>person</mat-icon>
+      {{ authService.username }}
+    </button>
+  }
+
+  <button mat-menu-item (click)="authService.logout()">
+    <mat-icon>logout</mat-icon>
+    Salir
+  </button>
+</ng-template>
 </mat-toolbar>
 <mat-drawer-container>
   <mat-drawer #myDrawer mode="side" opened position="start">
