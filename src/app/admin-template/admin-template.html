@@ -6,8 +6,8 @@
 
   <span style="flex: auto;"></span>
 
-  <button mat-button routerLink="/home">Home</button>
-  <button mat-button routerLink="/profile">Perfil</button>
+  <button mat-button routerLink="/admin/home">Home</button>
+  <button mat-button routerLink="/admin/profile">Perfil</button>
 
   <button mat-button [matMenuTriggerFor]="importMenu">
     <mat-icon iconPosition="end">keyboard_arrow_down</mat-icon>
@@ -15,29 +15,36 @@
   </button>
 
   <mat-menu #importMenu="matMenu">
-    <button mat-menu-item routerLink="/load-estudiantes">Cargar Estudiantes</button>
-    <button mat-menu-item routerLink="/load-pagos">Cargar Pagos</button>
+    <button mat-menu-item routerLink="/admin/load-estudiantes">Cargar Estudiantes</button>
+    <button mat-menu-item routerLink="/admin/load-pagos">Cargar Pagos</button>
   </mat-menu>
 
-  <button mat-raised-button color="accent" routerLink="/login">Salir</button>
+  @if (authService.isAuthenticated) {
+    <button mat-button>
+      <mat-icon iconPosition="end">person</mat-icon>
+      {{ authService.username }}
+    </button>
+  }
+
+  <button mat-raised-button color="accent" (click)="authService.logout()">Salir</button>
 </mat-toolbar>
 <mat-drawer-container>
   <mat-drawer #myDrawer mode="side" opened position="start">
     <mat-list>
       <mat-list-item>
-        <button mat-button routerLink="/dashboard">
+        <button mat-button routerLink="/admin/dashboard">
           <mat-icon mat-list-icon>dashboard</mat-icon>
           Dashboard
         </button>
       </mat-list-item>
       <mat-list-item>
-        <button mat-button routerLink="/estudiantes">
+        <button mat-button routerLink="/admin/estudiantes">
           <mat-icon mat-list-icon>group</mat-icon>
           Estudiantes
         </button>
       </mat-list-item>
       <mat-list-item>
-        <button mat-button routerLink="/pagos">
+        <button mat-button routerLink="/admin/pagos">
           <mat-icon mat-list-icon>attach_money</mat-icon>
           Pagos
         </button>

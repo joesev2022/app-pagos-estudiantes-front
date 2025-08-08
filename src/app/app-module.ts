@@ -24,6 +24,7 @@ import { Login } from './login/login';
 import { Estudiantes } from './estudiantes/estudiantes';
 import { Pagos } from './pagos/pagos';
 import { Dashboard } from './dashboard/dashboard';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { Dashboard } from './dashboard/dashboard';
     MatListModule,
     MatCardModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    ReactiveFormsModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners()
